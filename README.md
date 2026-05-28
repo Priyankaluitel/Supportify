@@ -22,33 +22,33 @@ Core Features<br>
 4)Campaign Details Page<br>
 5)Funding Progress Tracking<br>
 
-🖼️ Image Upload
-1)Upload Campaign Images
-2)Image Preview Support
-3)Cloud/Local Storage Integration
+🖼️ Image Upload<br>
+1)Upload Campaign Images<br>
+2)Image Preview Support<br>
+3)Cloud/Local Storage Integration<br>
 
-💳 Donations & Payments
-1)Secure Donation System
-2)Payment Integration (eSewa/Khalti/Stripe)
-3)Donation Tracking
-4)Real-time Funding Updates
+💳 Donations & Payments<br>
+1)Secure Donation System<br>
+2)Payment Integration (eSewa/Khalti/Stripe)<br>
+3)Donation Tracking<br>
+4)Real-time Funding Updates<br>
 
-🛡️ Admin Approval System
-1)Admin Dashboard
-2)Approve/Reject Campaigns
-3)Campaign Moderation
+🛡️ Admin Approval System<br>
+1)Admin Dashboard<br>
+2)Approve/Reject Campaigns<br>
+3)Campaign Moderation<br>
 
-🤖 AI Rewrite Assistant
-1)AI-powered Campaign Description Enhancement
-2)Improves readability and engagement
-3)Helps users write compelling fundraising stories
+🤖 AI Rewrite Assistant<br>
+1)AI-powered Campaign Description Enhancement<br>
+2)Improves readability and engagement<br>
+3)Helps users write compelling fundraising stories<br>
 
-📱 Responsive UI
-1)Fully Responsive Design
-2)Mobile-Friendly Interface
-3)Modern & Clean User Experience
+📱 Responsive UI<br>
+1)Fully Responsive Design<br>
+2)Mobile-Friendly Interface<br>
+3)Modern & Clean User Experience<br>
 
-🚀 Deployment
-1)Frontend Deployment on Vercel
-2)Backend Deployment on Render/Railway
-3)Cloud Database Hosting
+🚀 Deployment<br>
+1)Frontend Deployment on Vercel<br>
+2)Backend Deployment on Render<br>
+3)Cloud Database Hosting<br>
