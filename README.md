@@ -8,19 +8,19 @@ Supportify is built to simplify online fundraising while ensuring transparency, 
 The platform also integrates an AI-powered rewrite assistant to help campaign creators generate clearer, more engaging campaign descriptions.
 
 Features
-Core Features
-🔐 Authentication & Authorization
-1)User Registration & Login
-2)JWT-based Authentication
-3)Protected Routes
+Core Features<br>
+🔐 Authentication & Authorization<br>
+1)User Registration & Login<br>
+2)JWT-based Authentication<br>
+3)Protected Routes<br>
 4)Role-based Access (User/Admin)
 
-📢 Campaign Management
-1)Create Campaigns
-2)Edit & Update Campaigns
-3)Delete Campaigns
-4)Campaign Details Page
-5)Funding Progress Tracking
+📢 Campaign Management<br>
+1)Create Campaigns<br>
+2)Edit & Update Campaigns<br>
+3)Delete Campaigns<br>
+4)Campaign Details Page<br>
+5)Funding Progress Tracking<br>
 
 🖼️ Image Upload
 1)Upload Campaign Images
