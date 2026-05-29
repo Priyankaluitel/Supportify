@@ -1,0 +1,357 @@
+
+<!-- home.component.html -->
+<div class="supportify-home">
+ 
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="nav-container">
+      <a routerLink="/" class="nav-logo">
+        <img src="assets/logo.png" alt="Supportify Logo" class="logo-img" />
+        <div class="logo-text">
+          <span class="logo-name">Supportify</span>
+          <span class="logo-tagline">Serves one right</span>
+        </div>
+      </a>
+ 
+      <div class="nav-links" [class.open]="menuOpen">
+        <a routerLink="/campaigns" routerLinkActive="active">Campaigns</a>
+        <a routerLink="/how-it-works" routerLinkActive="active">How It Works</a>
+        <a routerLink="/about" routerLinkActive="active">About Us</a>
+        <a routerLink="/contact" routerLinkActive="active">Contact</a>
+      </div>
+ 
+      <div class="nav-actions">
+        <a routerLink="/auth/login" class="btn-ghost">Login</a>
+        <a routerLink="/auth/register" class="btn-primary">Start a Campaign</a>
+      </div>
+ 
+      <button class="hamburger" (click)="toggleMenu()" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+ 
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="hero-bg-pattern"></div>
+    <div class="hero-container">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          Nepal's #1 Crowdfunding Platform
+        </div>
+        <h1 class="hero-title">
+          Plant a Seed,<br />
+          <span class="gradient-text">Grow a Dream</span>
+        </h1>
+        <p class="hero-subtitle">
+          Supportify connects passionate Nepali changemakers with a community ready to uplift them. Fund education, healthcare, disasters, and beyond — one rupee at a time.
+        </p>
+        <div class="hero-actions">
+          <a routerLink="/campaigns/create" class="btn-hero-primary">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+            Start Your Campaign
+          </a>
+          <a routerLink="/campaigns" class="btn-hero-secondary">
+            Explore Campaigns
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <span class="stat-value">रू {{ totalRaised | number }}</span>
+            <span class="stat-label">Total Raised</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value">{{ totalCampaigns }}+</span>
+            <span class="stat-label">Campaigns</span>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <span class="stat-value">{{ totalDonors }}+</span>
+            <span class="stat-label">Supporters</span>
+          </div>
+        </div>
+      </div>
+ 
+      <div class="hero-visual">
+        <div class="hero-card-stack">
+          <div class="floating-card card-1">
+            <div class="fc-avatar">🌱</div>
+            <div class="fc-info">
+              <p class="fc-name">Scholarship for Jumla</p>
+              <div class="fc-progress-bar">
+                <div class="fc-progress-fill" style="width: 72%"></div>
+              </div>
+              <p class="fc-amount">रू 72,000 / 1,00,000 raised</p>
+            </div>
+          </div>
+          <div class="floating-card card-2">
+            <div class="fc-avatar">🏥</div>
+            <div class="fc-info">
+              <p class="fc-name">Medical Aid — Kavre</p>
+              <div class="fc-progress-bar">
+                <div class="fc-progress-fill" style="width: 55%"></div>
+              </div>
+              <p class="fc-amount">रू 55,000 / 1,00,000 raised</p>
+            </div>
+          </div>
+          <div class="floating-card card-3">
+            <div class="fc-donor">
+              <span class="fc-donor-icon">💚</span>
+              <span>Aashik donated रू 500</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-wave">
+      <svg viewBox="0 0 1440 80" preserveAspectRatio="none"><path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#ffffff"/></svg>
+    </div>
+  </section>
+ 
+  <!-- ===== TRUST BAR ===== -->
+  <section class="trust-bar">
+    <div class="trust-container">
+      <span class="trust-label">Trusted by</span>
+      <div class="trust-logos">
+        <span class="trust-item">🏦 Nepal Rastra Bank</span>
+        <span class="trust-item">🎓 Tribhuvan University</span>
+        <span class="trust-item">🏥 NHRC Nepal</span>
+        <span class="trust-item">🌍 UN Nepal</span>
+        <span class="trust-item">📰 Kantipur Media</span>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ===== CATEGORIES ===== -->
+  <section class="categories-section">
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-eyebrow">Browse by cause</p>
+        <h2 class="section-title">What moves you?</h2>
+        <p class="section-sub">Every rupee finds its rightful place.</p>
+      </div>
+      <div class="categories-grid">
+        <div
+          class="category-card"
+          *ngFor="let cat of categories"
+          [style.--cat-color]="cat.color"
+          (click)="navigateToCategory(cat.slug)"
+          role="button"
+          [attr.aria-label]="'Browse ' + cat.name"
+        >
+          <div class="cat-icon">{{ cat.icon }}</div>
+          <h3 class="cat-name">{{ cat.name }}</h3>
+          <p class="cat-count">{{ cat.count }} active</p>
+          <div class="cat-arrow">→</div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ===== FEATURED CAMPAIGNS ===== -->
+  <section class="campaigns-section">
+    <div class="section-container">
+      <div class="section-header-row">
+        <div>
+          <p class="section-eyebrow">Hand-picked</p>
+          <h2 class="section-title">Featured Campaigns</h2>
+        </div>
+        <a routerLink="/campaigns" class="see-all-link">
+          See all campaigns
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+ 
+      <div class="campaigns-grid">
+        <div class="campaign-card" *ngFor="let campaign of featuredCampaigns">
+          <div class="campaign-img-wrapper">
+            <img
+              [src]="campaign.imageUrl || 'assets/placeholder.jpg'"
+              [alt]="campaign.title"
+              class="campaign-img"
+              loading="lazy"
+            />
+            <span class="campaign-badge" [class]="'badge-' + campaign.category">
+              {{ campaign.categoryLabel }}
+            </span>
+            <button
+              class="bookmark-btn"
+              (click)="toggleBookmark(campaign, $event)"
+              [attr.aria-label]="campaign.bookmarked ? 'Remove bookmark' : 'Bookmark campaign'"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 012-2h10a2 2 0 012 2z"/></svg>
+            </button>
+          </div>
+          <div class="campaign-body">
+            <div class="campaign-meta">
+              <img [src]="campaign.creatorAvatar" alt="" class="creator-avatar" />
+              <span class="creator-name">{{ campaign.creatorName }}</span>
+              <span class="meta-sep">·</span>
+              <span class="campaign-location">📍 {{ campaign.location }}</span>
+            </div>
+            <h3 class="campaign-title">{{ campaign.title }}</h3>
+            <p class="campaign-excerpt">{{ campaign.excerpt }}</p>
+ 
+            <div class="progress-section">
+              <div class="progress-track">
+                <div
+                  class="progress-fill"
+                  [style.width.%]="getProgress(campaign)"
+                ></div>
+              </div>
+              <div class="progress-meta">
+                <span class="raised-amount">रू {{ campaign.raised | number }}</span>
+                <span class="goal-label">{{ getProgress(campaign) | number:'1.0-0' }}% of रू {{ campaign.goal | number }}</span>
+              </div>
+            </div>
+ 
+            <div class="campaign-footer">
+              <div class="footer-stats">
+                <span>👥 {{ campaign.donors }} donors</span>
+                <span>⏳ {{ campaign.daysLeft }} days left</span>
+              </div>
+              <a [routerLink]="['/campaigns', campaign.id]" class="donate-btn">
+                Donate Now
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ===== HOW IT WORKS ===== -->
+  <section class="how-section">
+    <div class="how-bg"></div>
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-eyebrow">Simple process</p>
+        <h2 class="section-title">From idea to impact</h2>
+        <p class="section-sub">Three steps to launch your campaign and receive support from across Nepal.</p>
+      </div>
+      <div class="steps-row">
+        <div class="step-card" *ngFor="let step of steps; let i = index">
+          <div class="step-number">{{ i + 1 }}</div>
+          <div class="step-icon">{{ step.icon }}</div>
+          <h3 class="step-title">{{ step.title }}</h3>
+          <p class="step-desc">{{ step.desc }}</p>
+        </div>
+        <div class="steps-connector"></div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ===== IMPACT NUMBERS ===== -->
+  <section class="impact-section">
+    <div class="section-container">
+      <div class="impact-grid">
+        <div class="impact-content">
+          <p class="section-eyebrow">Real impact</p>
+          <h2 class="section-title">Changing Nepal,<br/>one campaign at a time</h2>
+          <p class="impact-body">
+            From earthquake survivors in Sindhupalchok to scholarship dreamers in Humla — Supportify has been the bridge between need and generosity since 2023.
+          </p>
+          <a routerLink="/about" class="btn-outline-green">Read Our Story</a>
+        </div>
+        <div class="impact-stats-grid">
+          <div class="impact-stat" *ngFor="let stat of impactStats">
+            <span class="impact-num">{{ stat.value }}</span>
+            <span class="impact-label">{{ stat.label }}</span>
+            <span class="impact-desc">{{ stat.desc }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ===== TESTIMONIALS ===== -->
+  <section class="testimonials-section">
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-eyebrow">Stories</p>
+        <h2 class="section-title">Voices of change</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card" *ngFor="let t of testimonials">
+          <div class="quote-mark">"</div>
+          <p class="testimonial-text">{{ t.quote }}</p>
+          <div class="testimonial-author">
+            <img [src]="t.avatar" [alt]="t.name" class="author-avatar" />
+            <div>
+              <p class="author-name">{{ t.name }}</p>
+              <p class="author-role">{{ t.role }} · {{ t.location }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ===== CTA BANNER ===== -->
+  <section class="cta-section">
+    <div class="cta-container">
+      <div class="cta-leaves cta-leaf-left">🌿</div>
+      <div class="cta-leaves cta-leaf-right">🌿</div>
+      <h2 class="cta-title">Ready to make a difference?</h2>
+      <p class="cta-sub">Join thousands of Nepalis who are planting seeds of change every day.</p>
+      <div class="cta-actions">
+        <a routerLink="/campaigns/create" class="btn-cta-primary">Launch Your Campaign</a>
+        <a routerLink="/campaigns" class="btn-cta-secondary">Explore & Donate</a>
+      </div>
+    </div>
+  </section>
+ 
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="assets/logo.png" alt="Supportify" class="footer-logo" />
+        <div class="footer-logo-text">
+          <span class="footer-brand-name">Supportify</span>
+          <span class="footer-brand-tagline">Serves one right</span>
+        </div>
+        <p class="footer-brand-desc">
+          Nepal's trusted crowdfunding platform empowering communities to fund the causes that matter most.
+        </p>
+        <div class="footer-socials">
+          <a href="#" aria-label="Facebook">f</a>
+          <a href="#" aria-label="Twitter">𝕏</a>
+          <a href="#" aria-label="Instagram">ig</a>
+          <a href="#" aria-label="YouTube">yt</a>
+        </div>
+      </div>
+ 
+      <div class="footer-links-group">
+        <h4>Platform</h4>
+        <a routerLink="/campaigns">Browse Campaigns</a>
+        <a routerLink="/campaigns/create">Start Campaign</a>
+        <a routerLink="/how-it-works">How It Works</a>
+        <a routerLink="/pricing">Fees & Pricing</a>
+      </div>
+ 
+      <div class="footer-links-group">
+        <h4>Company</h4>
+        <a routerLink="/about">About Us</a>
+        <a routerLink="/team">Our Team</a>
+        <a routerLink="/blog">Blog</a>
+        <a routerLink="/careers">Careers</a>
+      </div>
+ 
+      <div class="footer-links-group">
+        <h4>Support</h4>
+        <a routerLink="/faq">FAQ</a>
+        <a routerLink="/contact">Contact</a>
+        <a routerLink="/trust-safety">Trust & Safety</a>
+        <a routerLink="/privacy">Privacy Policy</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2024 Supportify. All rights reserved.</p>
+      <p>Registered with Nepal Government | PAN: XXXXXXXX</p>
+    </div>
+  </footer>
+ 
+</div>
