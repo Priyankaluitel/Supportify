@@ -53,7 +53,7 @@ interface Testimonial {
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
   menuOpen = false;

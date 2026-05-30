@@ -1,0 +1,134 @@
+<!-- faq/faq.component.html -->
+<div class="min-h-screen bg-cream font-body">
+
+  <!-- Header -->
+  <section class="bg-green-700 pt-16 pb-24 relative overflow-hidden">
+    <div class="absolute inset-0 pointer-events-none"
+         style="background: radial-gradient(circle at 20% 60%, rgba(165,214,167,0.15) 0%, transparent 60%)">
+    </div>
+    <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+      <div class="inline-flex items-center gap-2 bg-green-600 text-green-200 text-sm font-semibold px-4 py-2 rounded-full mb-6">
+        ❓ Help Center
+      </div>
+      <h1 class="font-display text-4xl md:text-5xl font-bold text-white mb-5">
+        Frequently Asked Questions
+      </h1>
+      <p class="text-green-200 text-lg max-w-lg mx-auto leading-relaxed mb-8">
+        Everything you need to know about Supportify — from starting a campaign to receiving funds.
+      </p>
+      <!-- Search -->
+      <div class="max-w-md mx-auto relative">
+        <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input
+          type="text"
+          [(ngModel)]="searchQuery"
+          (input)="filterFaqs()"
+          placeholder="Search your question..."
+          class="w-full pl-12 pr-4 py-4 rounded-2xl text-sm text-gray-800 bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-400 shadow-lg"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave -->
+  <div class="-mt-6">
+    <svg viewBox="0 0 1440 40" preserveAspectRatio="none" class="w-full h-10">
+      <path d="M0,20 C360,40 1080,0 1440,20 L1440,40 L0,40 Z" fill="#f5f0e8"/>
+    </svg>
+  </div>
+
+  <div class="max-w-5xl mx-auto px-6 py-12">
+
+    <!-- Category Tabs -->
+    <div class="flex flex-wrap gap-2 mb-10 justify-center">
+      <button *ngFor="let cat of faqCategories"
+        (click)="selectedCategory = cat.id; filterFaqs()"
+        [class.bg-green-600]="selectedCategory === cat.id"
+        [class.text-white]="selectedCategory === cat.id"
+        [class.border-green-600]="selectedCategory === cat.id"
+        [class.bg-white]="selectedCategory !== cat.id"
+        [class.text-gray-600]="selectedCategory !== cat.id"
+        [class.border-gray-200]="selectedCategory !== cat.id"
+        class="px-5 py-2.5 rounded-full text-sm font-semibold border shadow-sm hover:border-green-400 hover:text-green-700 transition-all">
+        {{ cat.icon }} {{ cat.label }}
+      </button>
+    </div>
+
+    <!-- No results -->
+    <div *ngIf="filteredFaqs.length === 0" class="text-center py-20">
+      <div class="text-5xl mb-3">🔍</div>
+      <h3 class="font-display text-xl font-bold text-gray-600 mb-2">No results found</h3>
+      <p class="text-gray-400 text-sm">Try different keywords or browse by category.</p>
+    </div>
+
+    <!-- FAQ Sections by Category -->
+    <div *ngFor="let cat of visibleCategories" class="mb-12">
+      <div class="flex items-center gap-3 mb-5">
+        <span class="text-2xl">{{ cat.icon }}</span>
+        <h2 class="font-display text-2xl font-bold text-gray-800">{{ cat.label }}</h2>
+        <span class="text-sm text-gray-400 font-medium ml-1">{{ getCatFaqs(cat.id).length }} questions</span>
+      </div>
+
+      <div class="space-y-3">
+        <div *ngFor="let faq of getCatFaqs(cat.id); let i = index"
+          class="bg-white rounded-2xl shadow-sm border border-gray-50 overflow-hidden transition-all"
+          [class.border-green-100]="faq.open"
+          [class.shadow-card]="faq.open">
+
+          <!-- Question -->
+          <button
+            (click)="toggleFaq(faq)"
+            class="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-green-50 transition-all group">
+            <span class="text-sm font-semibold text-gray-800 group-hover:text-green-700 transition-colors pr-4 leading-snug">
+              {{ faq.question }}
+            </span>
+            <span class="flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all"
+              [class.bg-green-600]="faq.open"
+              [class.text-white]="faq.open"
+              [class.bg-gray-100]="!faq.open"
+              [class.text-gray-500]="!faq.open">
+              <span class="text-lg font-bold leading-none" [class.rotate-45]="faq.open" style="transition: transform 0.3s; display: block;">
+                {{ faq.open ? '×' : '+' }}
+              </span>
+            </span>
+          </button>
+
+          <!-- Answer -->
+          <div *ngIf="faq.open" class="px-6 pb-6 animate-fade-in">
+            <div class="pt-2 border-t border-gray-50">
+              <p class="text-sm text-gray-600 leading-relaxed mt-4">{{ faq.answer }}</p>
+              <div *ngIf="faq.link" class="mt-4">
+                <a [routerLink]="faq.link.url" class="inline-flex items-center gap-1.5 text-sm text-green-600 font-semibold hover:underline">
+                  {{ faq.link.label }} →
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Support Banner -->
+    <div class="mt-16 bg-green-700 rounded-3xl p-10 text-center relative overflow-hidden">
+      <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(circle at 80% 20%, rgba(165,214,167,0.15) 0%, transparent 50%)"></div>
+      <div class="relative z-10">
+        <div class="text-4xl mb-4">💬</div>
+        <h3 class="font-display text-2xl font-bold text-white mb-3">Still have questions?</h3>
+        <p class="text-green-200 text-sm mb-6 max-w-sm mx-auto leading-relaxed">
+          Our support team is available Sunday–Friday, 9AM–5PM NPT. Average response time: under 2 hours.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="mailto:support@supportify.com.np"
+            class="px-6 py-3 bg-white text-green-700 font-bold text-sm rounded-xl hover:shadow-lg transition-all hover:-translate-y-0.5">
+            ✉️ Email Support
+          </a>
+          <a href="https://wa.me/9779800000000" target="_blank"
+            class="px-6 py-3 bg-green-500 text-white font-bold text-sm rounded-xl hover:bg-green-400 transition-all hover:-translate-y-0.5">
+            💬 WhatsApp Us
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
