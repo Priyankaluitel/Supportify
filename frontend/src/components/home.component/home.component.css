@@ -1,4 +1,6 @@
-/* home.component.scss */
+
+/* ─── Google Fonts Import ─────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 /* ─── Brand Design Tokens ─────────────────────────────── */
 :root {
@@ -33,9 +35,6 @@
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'DM Sans', 'Segoe UI', sans-serif;
 }
-
-/* ─── Google Fonts Import ─────────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;700&family=DM+Sans:wght@300;400;500;600&display=swap');
 
 /* ─── Base ────────────────────────────────────────────── */
 * {
@@ -794,7 +793,6 @@
   line-height: 1.6;
   margin-bottom: 20px;
   display: -webkit-box;
-  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
